@@ -1,8 +1,8 @@
-import {useContext} from 'react';
+import { useContext } from 'react';
 import context from './TruncateContext';
 
 const useTruncate = () => {
-    return useContext(context);
-}
+  return useContext(context);
+};
 
 export default useTruncate;
