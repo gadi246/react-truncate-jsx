@@ -21,8 +21,8 @@ const tags = ['Orange', 'Apple', 'Pear'];
 const Ellipsis = forwardRef(
     (props, ref) => {
         return (
-            <div ref={ref} {...props} style={{ flexShrink: 0 }}>
-                +{moreCount.moreCount} tags
+            <div ref={ref} style={{ flexShrink: 0 }}>
+                +{props.moreCount} tags
             </div>
         );
     }
