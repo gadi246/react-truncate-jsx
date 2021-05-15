@@ -16,33 +16,46 @@ yarn add react-truncate-jsx
 import React, {forwardRef} from 'react';
 import Truncate, {TruncateList} from 'react-truncate-jsx';
 
-const tags = ['Orange', 'Apple', 'Pear'];
+const tags = ['Orange', 'Apple', 'Pear', 'Lemon', 'Watermelon'];
+
 
 const Ellipsis = forwardRef(
-    (props, ref) => {
+    ({moreCount, moreChildren, ...props}, ref) => {
         return (
-            <div ref={ref} style={{ flexShrink: 0 }}>
-                +{props.moreCount} tags
+            <div ref={ref} style={{ flexShrink: 0 }} {...props}>
+                +{moreCount} tags
             </div>
         );
     }
 );
 
 const App = () => (
-    <Truncate>
-        <div
-            style={{
-                display: 'flex',
-                flexWrap: 'wrap'
-            }}
-        >
-            <TruncateList ellipsis={Ellipsis}>
-                {tags.map((t) => (
-                    <div key={t}>{t}</div>
-                ))}
-            </TruncateList>
-        </div>
-    </Truncate>
+    <div style={{width:200}}>
+        <Truncate>
+            <div
+                style={{
+                    display: 'flex',
+                    flexWrap: 'wrap'
+                }}
+            >
+                <TruncateList ellipsis={Ellipsis}>
+                    {tags.map((t) => (
+                        <div
+                            key={t}
+                            style={{
+                                padding: '3px 5px',
+                                background: '#bababa',
+                                flexShrink: 0,
+                                marginRight: 5,
+                            }}
+                        >
+                            {t}
+                        </div>
+                    ))}
+                </TruncateList>
+            </div>
+        </Truncate>
+    </div>
 )
 ```
 
