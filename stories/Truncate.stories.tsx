@@ -1,6 +1,6 @@
 import React, { forwardRef, useState } from 'react';
 import { Meta } from '@storybook/react';
-import Truncate, {TruncateList} from '../';
+import Truncate, {TruncateList} from '../src';
 
 const data = ['New York', 'Double bed', 'Free Cables', 'XXX', 'Pool', 'Luxury'];
 const data2 = [
