@@ -14,7 +14,7 @@ yarn add react-truncate-jsx
 ## Usage
 ```javascript
 import React, {forwardRef} from 'react';
-import Trauncate, {TruncateList} from 'react-truncate-jsx';
+import Truncate, {TruncateList} from 'react-truncate-jsx';
 
 const tags = ['Orange', 'Apple', 'Pear'];
 
