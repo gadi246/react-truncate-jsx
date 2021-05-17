@@ -1,5 +1,8 @@
 # React Truncate JSX
 
+
+<img width="600" height="auto" src="https://user-images.githubusercontent.com/18291099/118523398-c45d3000-b745-11eb-9eaf-bd4f05a87a5e.png"/>
+
 ## You want to ellipsisify some text in your React app but it's encapsulated in a React component.
 
 ## Installation
