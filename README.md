@@ -5,6 +5,8 @@
 
 ## You want to ellipsisify some text in your React app but it's encapsulated in a React component.
 
+[CodeSandBox DEMO](https://codesandbox.io/s/charming-varahamihira-guso4?file=/src/App.js)
+
 ## Installation
 ```shell
 npm install react-truncate-jsx
