@@ -4,6 +4,7 @@ export interface TruncateContextInterface {
   observer: IntersectionObserver;
   truncateIndex: number | null;
   isTruncating: boolean;
+  done: boolean;
 }
 const context = createContext({} as TruncateContextInterface);
 

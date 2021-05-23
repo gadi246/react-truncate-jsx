@@ -1,6 +1,7 @@
 import React, { forwardRef, useState } from 'react';
 import { Meta } from '@storybook/react';
 import Truncate, {TruncateList} from '../src';
+import {TagRef, TagProps} from '../src/TruncateList';
 
 const data = ['New York', 'Double bed', 'Free Cables', 'XXX', 'Pool', 'Luxury'];
 const data2 = [
@@ -11,9 +12,6 @@ const data2 = [
   'Secret-Door',
   'Fire-Place',
 ];
-
-type TagProps = { children: React.ReactNode };
-type TagRef = HTMLDivElement;
 
 const Tag = forwardRef<TagRef, TagProps>(({ children, ...props }, ref) => (
   <div

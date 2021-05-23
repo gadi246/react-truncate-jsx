@@ -12,24 +12,35 @@ const { Provider } = context;
 function Truncate({ children, isTruncating = true }: TruncateProps) {
   const ref = useRef();
   const [truncateIndex, setTruncateIndex] = useState<number | null>(null);
+  const [done, setDone] = useState(false);
+
   const observer = useMemo(() => {
     return new IntersectionObserver(
       (entries) => {
         entries.forEach((entry: IntersectionObserverEntry) => {
+          if(!(entry.target instanceof HTMLElement)) return;
+
+          const { observeIndex = '' } = entry.target.dataset;
           if (
             entry.isIntersecting &&
-            entry.intersectionRatio < 1 &&
-            entry.target instanceof HTMLElement
+            entry.intersectionRatio < 1
           ) {
-            const { observeIndex = '' } = entry.target.dataset;
             if (observeIndex.includes('ellipsis')) {
               setTruncateIndex((prev: number) => prev - 1);
             } else {
               setTruncateIndex(parseInt(observeIndex));
             }
           }
-          if (!entry.isIntersecting && entry.target instanceof HTMLElement) {
-            const { observeIndex = '' } = entry.target.dataset;
+
+          if( entry.isIntersecting &&
+              entry.intersectionRatio === 1 &&
+              observeIndex.includes('ellipsis')
+          ) {
+            setDone(true);
+          }
+
+            // in case no intersection even though elements are overflowing
+          if (!entry.isIntersecting) {
             setTruncateIndex((prev) => {
               return prev === null ? parseInt(observeIndex) - 1 : prev;
             });
@@ -45,6 +56,7 @@ function Truncate({ children, isTruncating = true }: TruncateProps) {
 
   useEffect(() => {
     setTruncateIndex(null);
+    setDone(false);
   }, [children]);
 
   const wrapper = React.Children.only(children);
@@ -60,7 +72,9 @@ function Truncate({ children, isTruncating = true }: TruncateProps) {
     observer,
     truncateIndex,
     isTruncating,
+    done
   };
+
   return <Provider value={context}>{newWrapper}</Provider>;
 }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 import context from './TruncateContext';
 import TruncateItem from './TruncateItem';
 
@@ -8,11 +8,14 @@ interface TruncateListProps {
   ellipsis: EllipsisProps & React.ComponentPropsWithRef<any>;
 }
 
+export  declare type TagProps = { children: React.ReactNode };
+export  declare type TagRef = HTMLDivElement;
+
 function TruncateList({
   children,
-  ellipsis: Ellipsis,
+  ellipsis: Ellipsis = forwardRef<TagRef, TagProps>((props, ref) => <div ref={ref} {...props}>...</div>),
 }: TruncateListProps): JSX.Element {
-  const { truncateIndex, observer, isTruncating } = React.useContext(context);
+  const { truncateIndex, observer, isTruncating, done } = React.useContext(context);
   if (!isTruncating) return <>{children}</>;
   return (
     <>
@@ -26,12 +29,21 @@ function TruncateList({
         );
       })}
       {truncateIndex && Ellipsis && (
-        <TruncateItem id={`ellipsis-${truncateIndex}`} observer={observer}>
-          <Ellipsis
-            moreCount={React.Children.count(children) - truncateIndex}
-            moreChildren={React.Children.toArray(children).slice(truncateIndex)}
-          />
-        </TruncateItem>
+          <>
+            {done ? (
+                <Ellipsis
+                    moreCount={React.Children.count(children) - truncateIndex}
+                    moreChildren={React.Children.toArray(children).slice(truncateIndex)}
+                />
+            ) : (
+                <TruncateItem id={`ellipsis-${truncateIndex}`} observer={observer}>
+                  <Ellipsis
+                      moreCount={React.Children.count(children) - truncateIndex}
+                      moreChildren={React.Children.toArray(children).slice(truncateIndex)}
+                  />
+                </TruncateItem>
+            )}
+          </>
       )}
     </>
   );
